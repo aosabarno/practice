@@ -35,7 +35,6 @@ call plug#begin('~/vimfiles/plugged')
   Plug 'tyru/eskk.vim'
 call plug#end()
 
-
 set showcmd
 set autoread
 set number
@@ -44,14 +43,12 @@ set laststatus=2
 set wrap
 set showtabline=2
 
-" 自動改行防止
 set textwidth=0 
 
 set directory=~\Documents\BackupFiles\Vim\
-set backupdir=~\Documents\BackupFiles\Vim\
-set undodir=~\Documents\BackupFiles\Vim\
 set updatetime=30000
 set updatecount=500
+set noundofile
 set nobackup
 
 set smartindent
@@ -76,10 +73,6 @@ autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
 set visualbell t_vb=
 set noerrorbells
 
-" フォント
-set guifont=Ricty\ Diminished:h12:w6 guifontwide=Ricty\ Diminished:h12
-"set guifont=MyricaM\ MMod:h16
-"set linespace=4
 
 " 折り返し等も加味した位置へ上下移動
 nnoremap j gj
@@ -100,6 +93,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " gVim の場合にメニューなどを表示しない
 if has('gui')
+  set guifont=Ricty\ Diminished:h12:w6 guifontwide=Ricty\ Diminished:h12
   set guioptions-=T
   set guioptions-=m
   set guioptions-=r
@@ -131,7 +125,6 @@ let @m = "Memo\\" . strftime("%Y%m%d") . "_"
 " スペルチェック無効化
 let g:markdown_enable_spell_checking = 0
 
-
 function! s:GetBufByte()
   let byte = line2byte(line('$') + 1)
   if byte == -1
@@ -149,11 +142,11 @@ let g:eskk#directory = "~/.config/skk"
 let g:eskk#dictionary = { 'path': "~/.config/skk/my_jisyo", 'sorted': 1, 'encoding': 'utf-8',}
 let g:eskk#large_dictionary = {'path': "~/.config/skk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp',}
 
-let g:eskk#kakutei_when_unique_candidate = 1 "漢字変換した時に候補が1つの場合、自動的に確定する
-let g:eskk#enable_completion = 0             "neocompleteを入れないと、1にすると動作しなくなるため0推奨
-"let g:eskk#no_default_mappings = 1           "デフォルトのマッピングを削除
-let g:eskk#keep_state = 0                    "ノーマルモードに戻るとeskkモードを初期値にする
-let g:eskk#egg_like_newline = 1              "漢字変換を確定しても改行しない。
+let g:eskk#kakutei_when_unique_candidate = 1
+let g:eskk#enable_completion = 0
+"let g:eskk#no_default_mappings = 1
+let g:eskk#keep_state = 0
+let g:eskk#egg_like_newline = 1
 
 " eskkのモードについてlightlineに表示する為の関数
 function L_eskk_get_mode()
